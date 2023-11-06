@@ -23,9 +23,6 @@ MODE = 'TRAINING'
 gamma = 0.8
 num_of_episodes = 1
 
-PROPORTIONAL_GAIN = 1.2
-TOLERANCE_LEVEL = 10
-
 #Reward-Table
 RewardTable = [ [-10, -10, 50],
                 [50, -5, -5],
@@ -55,12 +52,12 @@ light_sensor = ColorSensor(Port.S4)
 robot = DriveBase(left_motor, right_motor, wheel_diameter=18, axle_track=190)
 
 # Check State
-def set_state(light_sensor_reading):
-    if light_sensor_reading < BLACK_VALUE:
+def set_state(sr):
+    if sr < BLACK_VALUE:
         next_state = 0
-    elif light_sensor_reading >= BLACK_VALUE and light_sensor_reading <= WHITE_VALUE:
+    elif sr >= BLACK_VALUE and sr <= WHITE_VALUE:
         next_state = 1
-    elif light_sensor_reading > WHITE_VALUE:
+    elif sr > WHITE_VALUE:
         next_state = 2
     
     return next_state
@@ -71,11 +68,11 @@ def MoveForward():
         robot.straight(DRIVE_DISTANCE)
 
 def TurnRight():
-    while not(light_sensor.reflection() >= BLACK_VALUE and light_sensor.reflection() <= WHITE_VALUE):
+    while not(light_sensor.reflection() > BLACK_VALUE and light_sensor.reflection() < WHITE_VALUE):
         robot.turn(-TURN_ANGLE)
 
 def TurnLeft():
-    while not(light_sensor.reflection() >= BLACK_VALUE and light_sensor.reflection() <= WHITE_VALUE):
+    while not(light_sensor.reflection() > BLACK_VALUE and light_sensor.reflection() < WHITE_VALUE):
         robot.turn(TURN_ANGLE)
 
 def goto_next(current_state):
@@ -88,15 +85,13 @@ def goto_next(current_state):
 def CTA():
     if EV3_ACTION == 0:
         MoveForward()
-        next_state = set_state(light_sensor.reflection())
+        return set_state(light_sensor.reflection())
     elif EV3_ACTION == 1:
         TurnLeft()
-        next_state = set_state(light_sensor.reflection())
+        return set_state(light_sensor.reflection())
     elif EV3_ACTION == 2:
         TurnRight()
-        next_state = set_state(light_sensor.reflection())
-    
-    return next_state
+        return set_state(light_sensor.reflection())
     
 
 while True:
