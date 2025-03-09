@@ -1,31 +1,79 @@
 # Q-Learning for LEGO Mindstorms EV3
 
-This Python script utilizes Q-learning to navigate a LEGO Mindstorms EV3 robot in an environment with light sensors, motors, and an infrared sensor. The script is designed to enable the robot to learn and adapt its behavior for movement based on environmental data and predefined parameters.
+This Python script implements Q-learning to enable a LEGO Mindstorms EV3 robot to navigate its environment using light sensors, motors, and an infrared sensor. Designed for adaptive movement, the script allows the robot to learn and refine its behavior based on environmental data and predefined parameters.
 
-## Functionality
+## Features
 
-The script features:
+- **Environment Configuration**: Configures sensor thresholds, robot speed, and turning rates.
+- **Q-Table and Action Table**: Initializes and updates Q-learning tables to store rewards and actions for different states.
+- **Robot Actions**: Defines movement functions based on sensor readings and criteria.
+- **State and Action Selection**: Determines the robot’s state from sensor data and selects optimal actions using Q-values.
+- **Learning and Running Modes**: Supports a learning phase to train the robot and a running mode to execute learned behaviors.
 
-- **Environment Configuration:** Sets up environmental and robot-specific data such as sensor thresholds, robot speed, and turning rates.
-- **Q-Table and Action Table:** Initializes and updates tables for Q-learning, storing rewards and actions taken in various states.
-- **Robot Actions:** Defines functions for the robot to move in different directions based on sensor readings and predefined criteria.
-- **State and Action Selection:** Determines the current state based on sensor readings and selects the best action using Q-values.
-- **Learning and Running Modes:** Operates in learning and running modes, allowing the robot to learn from its actions and later execute learned behaviors.
+## Prerequisites
 
-## How to Use
+- [LEGO Mindstorms EV3](https://www.lego.com/en-us/themes/mindstorms) set with:
+  - Light sensors
+  - Motors
+  - Infrared sensor
+- Python environment with [Pybricks](https://pybricks.com/) installed for EV3 compatibility.
+- USB or Bluetooth connection to upload and run the script on the EV3 brick.
 
-### Requirements
+## Installation
 
-- LEGO Mindstorms EV3 set
-- Python environment compatible with Pybricks for EV3
+1. **Set Up the EV3**:
+
+   - Assemble your LEGO Mindstorms EV3 robot with the required sensors and motors.
+   - Ensure the EV3 brick is powered on and connected to your computer.
+
+2. **Install Pybricks**:
+
+   - Follow the [Pybricks installation guide](https://pybricks.com/get-started/) to set up the Python environment on your EV3.
+
+3. **Clone the Repository**:
+   ```bash
+   git clone https://github.com/<your-username>/q-learning-ev3.git
+   cd q-learning-ev3
+   ```
+4. **Upload the Script:**
+
+   - Transfer the Python script (e.g., `main.py`) to the EV3 brick using Pybricks tools or a compatible IDE.
+
+## Usage
 
 ### Running the Script
 
-1. Ensure the script is uploaded and executed on the LEGO Mindstorms EV3.
-2. Adjust the environmental and robot-specific parameters if needed.
-3. Run the script to observe the robot's learning process or its execution based on learned behavior.
+1. **Configure Parameters (optional):**
 
-### Important Notes
+   - Open the script and adjust environment-specific settings (e.g., sensor thresholds, speed) as needed.
 
-- The script utilizes Q-learning principles for adaptive behavior based on rewards and predefined actions.
-- Modes: The script operates in learning mode initially, transitioning to running mode after a predefined number of learning iterations.
+2. **Execute the Script:**
+
+   - Run the script on the EV3 brick via Pybricks or your IDE.
+
+   - The robot will begin in learning mode, adapting its behavior based on sensor data and rewards.
+
+3. **Observe Behavior:**
+   - Monitor the robot as it learns. After a set number of iterations, it switches to running mode to execute learned actions.
+
+### Modes
+
+- **Learning Mode:** The robot explores and updates its Q-table based on rewards.
+
+- **Running Mode:** The robot uses the trained Q-table to navigate efficiently.
+
+## Important Notes
+
+- The script relies on Q-learning, a reinforcement learning technique, to adapt to the environment.
+
+- Ensure sensors are calibrated and the environment is consistent for optimal learning.
+
+- Modify the iteration threshold in the script to control when it transitions from learning to running mode.
+
+## Dependencies
+
+- **Python:** Compatible with Pybricks for EV3.
+
+- **Pybricks:** Library for programming the EV3 in Python.
+
+- **LEGO EV3 Hardware:** Light sensors, motors, and infrared sensor.
